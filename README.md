@@ -13,7 +13,7 @@ Host RAM: 16GB
 ```
 
 ## Security Tools Used
-```
+```bash
 UFW (Uncomplicated Firewall)
 Fail2Ban
 systemctl
@@ -25,7 +25,7 @@ ss (socket statistics)
 Configured UFW to block incoming connections by default.
 
 Commands used:
-```
+```bash
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
@@ -36,11 +36,11 @@ sudo ufw status verbose
 Checked enabled services and disabled unnecessary services to reduce attack surface.
 
 Command:
-```
+```bash
 systemctl list-unit-files --type=service --state=enabled
 ```
 Disabled printing services (not needed for server environments):
-```
+```bash
 sudo systemctl disable cups
 sudo systemctl disable cups.path
 sudo systemctl disable cups.socket
@@ -48,7 +48,7 @@ sudo systemctl disable cups.socket
 
 ### 3. Brute Force Protection
 Installed Fail2Ban to protect against SSH brute-force attacks.
-```
+```bash
 sudo apt install fail2ban -y
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
@@ -56,7 +56,7 @@ sudo systemctl start fail2ban
 
 ### 4. Port Auditing
 Checked open network ports.
-```
+```bash
 sudo ss -tulnp
 ```
 
