@@ -1,21 +1,27 @@
 # Linux System Hardening Lab
 
-## Overview
-This project demonstrates how to harden an Ubuntu Linux system to improve security and reduce the attack surface.
-
-The lab was built in a VirtualBox environment and focuses on implementing firewall rules, auditing services, and configuring security protections.
+This project demonstrates Linux system hardening techniques performed on an Ubuntu virtual machine. The lab focuses on reducing the attack surface by configuring firewall rules, auditing running services, disabling unnecessary services, implementing brute-force protection, and reviewing open network ports.
 
 ## Lab Environment
-```bash
-Hypervisor: VirtualBox
-Operating System: Ubuntu
-Host RAM: 16GB
-```
+
+Hypervisor: VirtualBox  
+Operating System: Ubuntu  
+Host RAM: 16GB  
 
 ## Security Tools Used
+
+- UFW (Uncomplicated Firewall)
+- Fail2Ban
+- systemctl
+- ss (socket statistics)
+
+---
+
 ## Firewall Configuration
 
 Configured UFW to block incoming connections by default.
+
+Commands used:
 
 ```bash
 sudo ufw default deny incoming
@@ -30,7 +36,7 @@ sudo ufw status verbose
 
 ## Service Auditing
 
-Checked enabled services and audited running services to identify unnecessary services.
+Checked enabled services to identify unnecessary services that could increase the attack surface.
 
 ```bash
 systemctl list-unit-files --type=service --state=enabled
@@ -42,7 +48,7 @@ systemctl list-unit-files --type=service --state=enabled
 
 ## Disabled Unnecessary Services
 
-Disabled the CUPS printing service to reduce attack surface since it is not required for this system.
+Disabled the CUPS printing service since it was not required for the system.
 
 ```bash
 systemctl status cups
@@ -54,7 +60,7 @@ systemctl status cups
 
 ## Brute Force Protection
 
-Installed and enabled Fail2Ban to mitigate SSH brute-force attacks.
+Installed and enabled Fail2Ban to protect against SSH brute-force attacks.
 
 ```bash
 sudo apt install fail2ban -y
@@ -69,7 +75,7 @@ sudo systemctl status fail2ban
 
 ## Open Port Audit
 
-Audited listening network ports to verify only necessary services were exposed.
+Audited open network ports to verify that only necessary services were listening.
 
 ```bash
 sudo ss -tulnp
@@ -77,13 +83,15 @@ sudo ss -tulnp
 
 ![Open Ports](open-port.png)
 
+---
+
 ## Security Concepts Demonstrated
 
-• Attack surface reduction  
-• Firewall policy enforcement  
-• Service auditing  
-• Brute-force attack mitigation  
-• Linux system hardening  
+- Attack surface reduction
+- Firewall configuration
+- Service auditing
+- Brute-force attack mitigation
+- Linux system hardening
 
 ## Future Improvements
 
