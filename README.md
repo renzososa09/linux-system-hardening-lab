@@ -13,18 +13,10 @@ Host RAM: 16GB
 ```
 
 ## Security Tools Used
-```bash
-UFW (Uncomplicated Firewall)
-Fail2Ban
-systemctl
-ss (socket statistics)
-```
-## Hardening Steps Performed
+## Firewall Configuration
 
-### 1. Firewall Configuration
 Configured UFW to block incoming connections by default.
 
-Commands used:
 ```bash
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
@@ -32,33 +24,58 @@ sudo ufw enable
 sudo ufw status verbose
 ```
 
-### 2. Service Auditing
-Checked enabled services and disabled unnecessary services to reduce attack surface.
+![UFW Status](ufw-status.png)
 
-Command:
+---
+
+## Service Auditing
+
+Checked enabled services and audited running services to identify unnecessary services.
+
 ```bash
 systemctl list-unit-files --type=service --state=enabled
 ```
-Disabled printing services (not needed for server environments):
+
+![Service Audit](service-audit.png)
+
+---
+
+## Disabled Unnecessary Services
+
+Disabled the CUPS printing service to reduce attack surface since it is not required for this system.
+
 ```bash
-sudo systemctl disable cups
-sudo systemctl disable cups.path
-sudo systemctl disable cups.socket
+systemctl status cups
 ```
 
-### 3. Brute Force Protection
-Installed Fail2Ban to protect against SSH brute-force attacks.
+![CUPS Disabled](cups-disabled.png)
+
+---
+
+## Brute Force Protection
+
+Installed and enabled Fail2Ban to mitigate SSH brute-force attacks.
+
 ```bash
 sudo apt install fail2ban -y
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
+sudo systemctl status fail2ban
 ```
 
-### 4. Port Auditing
-Checked open network ports.
+![Fail2Ban Status](fail2ban-status.png)
+
+---
+
+## Open Port Audit
+
+Audited listening network ports to verify only necessary services were exposed.
+
 ```bash
 sudo ss -tulnp
 ```
+
+![Open Ports](open-port.png)
 
 ## Security Concepts Demonstrated
 
