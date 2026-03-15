@@ -14,7 +14,7 @@ Host RAM: 16GB
 - Fail2Ban
 - systemctl
 - ss (socket statistics)
-
+- Lynis
 ---
 
 ## Firewall Configuration
