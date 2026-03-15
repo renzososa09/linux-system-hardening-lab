@@ -100,7 +100,7 @@ Run audit:
 ```bash
 sudo lynis audit system
 ```
-
+![Lynis](/Lynis.png)
 
 ## Security Concepts Demonstrated
 
