@@ -85,6 +85,23 @@ sudo ss -tulnp
 
 ---
 
+## System Audit with Lynis
+
+Installed Lynis to perform a security audit on the hardened Ubuntu system.
+
+Install Lynis:
+
+```bash
+sudo apt install lynis -y
+```
+
+Run audit:
+
+```bash
+sudo lynis audit system
+```
+
+
 ## Security Concepts Demonstrated
 
 - Attack surface reduction
